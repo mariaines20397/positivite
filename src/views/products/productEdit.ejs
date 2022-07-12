@@ -1,0 +1,85 @@
+<%- include('../partials/head') %> 
+<body>
+    <header>
+        <%- include('../partials/header')  %>
+    </header>
+    <main>
+        <div class="container">
+            <div class="row text-center">
+              <h1>Edición de Productos</h1>
+              <hr>
+        </div>
+
+        <div class="row justify-content-lg-center">
+            <div class="row" style="width: 40rem;">
+                <form action="/products/edit/<%= producto.id  %>" method="post" enctype="multipart/form-data">
+
+                    <div class="input-group mb-3">
+                        <% if(locals.errors && errors.name){ %>
+                            <div class="form-control"><%= errors.name.msg %></div> 
+                        <% } %>
+                        <span class="input-group-text" id="basic-addon1">Nombre del Producto:</span>
+                        <input type="text" id="name" name="name" value="<%= locals.oldData ? oldData.name : producto.name  %>" aria-describedby="basic-addon1" class="form-control">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <% if(locals.errors && errors.price){ %>
+                            <div class="formularios_error"><%= errors.price.msg %></div> 
+                        <% } %>
+                        <span class="input-group-text" id="basic-addon2">Precio:</span>
+                        <input type="text" id="price" name="price" value="<%= locals.oldData ? oldData.price : producto.price  %>" aria-describedby="basic-addon2"  class="form-control">
+                    </div>
+                    
+                    <div class="input-group mb-3">
+                        <% if(locals.errors && errors.category){ %>
+                            <div class="formularios_error"><%= errors.category.msg %></div> 
+                        <% } %>
+                        <select name="category" id="category" class="form-select" value="<%= locals.oldData ? oldData.category : null  %>">
+                            <option value="<%= producto.categories.id %>" hidden><%= producto.categories.categoria %></option>
+                            <% for (const categoria of categorias){
+                                if(producto.categories.categoria !== categoria.categoria){ %>
+                                <option value="<%= categoria.id %>"><%= categoria.categoria %></option>
+                                <% } %>
+                            <% } %>
+                        </select>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <% if(locals.errors && errors.description){ %>
+                            <div class="formularios_error"><%= errors.description.msg %></div> 
+                        <% } %>
+                        <span class="input-group-text" id="basic-addon3">Descripción:</span>
+                        <textarea name="description" id="description" class="form-control" aria-describedby="basic-addon3" ><%= locals.oldData ? oldData.description : producto.description  %></textarea>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <% if(locals.errors && errors.image){ %>
+                            <div class="formularios_error"><%= errors.image.msg %></div>
+                        <% } %>
+                        <input type="file" name="image" id="seleccionar" class="form-control" accept="image/*" placeholder="Imagen:" aria-label="Imagen" value="<%= locals.oldData ? oldData.image : producto.imagen  %>">
+                        <img width="20%" src="/img/<%= producto.image %>" alt="" id="imagenActual">
+                        <script src="/js/preview_ed.js"></script>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <% if(locals.errors && errors.stock){ %>
+                            <div class="formularios_error"><%= errors.stock.msg %></div>
+                        <% } %>
+                        <span class="input-group-text" id="basic-addon4">Stock:</span>
+                        <input type="text" name="stock" id="stock" class="form-control" aria-label="Stock" aria-describedby="basic-addon4" value="<%= locals.oldData ? oldData.stock : producto.stock  %>">
+                    </div>
+
+                    <div class="text-end">
+                       <button type="submit" class="btn btn-success">Guardar</button>
+                       <a href="/admin/adminproductos" class="btn btn-danger">Cancelar</a>    
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </main>
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+</body>
+</html>

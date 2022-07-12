@@ -1,0 +1,60 @@
+<%- include('../partials/head') %> 
+<body>
+    <header>
+        <%- include('../partials/header')  %>
+    </header>
+    <main>
+        <div class="container">
+            <div class="row text-center">
+                <h1>Iniciar Sesión</h1>
+                <hr>
+            </div>
+            <div class="row justify-content-lg-center">
+                <div class="row" style="width: 40rem;">
+                    <div>
+                        <ul id="errores"> </ul>
+                    </div>
+                    <form action="/users/login" method="post" class="formulario">
+
+                        <% if(locals.errors && errors.email){ %>
+                            <div class="form-errors"><%= errors.email.msg %></div> 
+                        <% } %>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon2">@ejemplo.com</span>
+                            <input type="email" name="email" id="email" class="form-control" placeholder="Email: " aria-label="Email" aria-describedby="basic-addon2" value="<%= locals.oldData ? oldData.email : null  %>">
+                        </div>
+
+                        <% if(locals.errors && errors.password){ %>
+                            <div class="form-errors"><%= errors.password.msg %></div> 
+                        <% } %>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon2">Confirmar contraseña:</span>
+                            <input type="password" name="password" id="password"  class="form-control" aria-label="Password" aria-describedby="basic-addon2">
+                        </div>
+
+                        <% if(locals.errors){ %>
+                            <div class="form-errors">Credenciales Inválidas</div> 
+                        <% } %>
+
+                        <input type="checkbox" name="recordarPassword"> Recordar contraseña</label>
+
+                        <div class="row">
+                            <a href="" class="text-center">
+                                <button type="submit" class="btn btn-success">Ingresar</button>
+                            </a>
+                        </div>
+            
+                        <div class="row">
+                            <a href="/users/register" class="nav-link text-center">Registrarse</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+    <!-- <script src="/js/login.js"></script> -->
+</body>
+</html>

@@ -1,0 +1,54 @@
+<%- include('../../partials/head') %> 
+<body>
+    <header>
+        <%- include('../../partials/header')  %>
+    </header>
+    <main>
+        <div class="container">
+            <div class="row">
+                <h1 class="text-center">Administración de Productos</h1>
+            </div>
+            <hr>
+            <div class="row text-end">
+                <a href="/products/create/">
+                    <button type="submit" class="btn btn-success">Agregar</button>
+                </a>
+            </div>
+            <table class="table table-success table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Imagen</th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Editar</th>
+                    <th scope="col">Eliminar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% productos.forEach(function(producto){ %>
+                        <tr>
+                            <th scope="row"><%= producto.id %></th>
+                            <td><img src="/img/<%= producto.image  %>" alt="<%= producto.name %>" class="img-thumbnail" width="100"></td>
+                            <td><%= producto.name %></td>
+                            <td>
+                                <a href="/products/edit/<%= producto.id %>">
+                                    <button type="submit" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></button>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/products/delete/<%= producto.id %>">
+                                    <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+                                </a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <%- include('../../partials/footer'); %>
+    </footer>
+</body>
+</html>

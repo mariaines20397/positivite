@@ -1,0 +1,23 @@
+[
+ {
+  "id": 1,
+  "name": "WillyMiller",
+  "email": "willymiller41@hotmail.com",
+  "password": "$2a$10$28MyFQt/ghCo.FVnVkWDTeHBBacO0FkVph1DZDEEpbQ5OcTdkIvMa",
+  "avatar": "usuario_1649794667830.jpg"
+ },
+ {
+  "id": 2,
+  "name": "CamilaMiller",
+  "email": "camilamiller@hotmail.com",
+  "password": "$2a$10$JUTl4bBjZ8KqWLV2TD3N4uhXKmZ6idEoEC.CX7f2SbbCZ.V3541tK",
+  "avatar": "usuario_1650580004612.jpg"
+ },
+ {
+  "id": 3,
+  "name": "KarinaFusini",
+  "email": "karinafusini@hotmail.com",
+  "password": "$2a$10$o/XM9Emr8tB2/vyncNoW2eA//xJ0o./pFhu/OThk7cqmyQWeLoVBi",
+  "avatar": "usuario_1650583057772.jpg"
+ }
+]

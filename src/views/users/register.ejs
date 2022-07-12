@@ -1,0 +1,102 @@
+<%- include('../partials/head') %> 
+<body>
+  <header>
+      <%- include('../partials/header')  %>
+  </header>
+  <main>
+    <div class="container">
+      <div class="row text-center">
+        <h1>Registro</h1>
+        <hr>
+      </div>
+    <div class="row justify-content-lg-center">
+      <div class="row" style="width: 40rem;">
+        <form action="/users/register" method="post" enctype="multipart/form-data">
+          <% if (locals.errorEmailExist){ %>
+            <h5 class="form-errors"><%= errorEmailExist %> </h5>
+             <% } %>
+
+          <% if(locals.errors && errors.name){ %>
+            <div class="form-errors"><%= errors.name.msg %></div> 
+          <% } %>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">@</span>
+            <input type="text" name="name" id="name" class="form-control" placeholder="Nombre:" aria-label="Nombre" aria-describedby="basic-addon1" value="<%= locals.oldData ? oldData.name : null  %>">
+          </div>
+          
+          <% if(locals.errors && errors.email){ %>
+            <div class="form-errors"><%= errors.email.msg %></div> 
+          <% } %>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon2">@ejemplo.com</span>
+            <input type="email" name="email" id="email" class="form-control" placeholder="Email: " aria-label="Email" aria-describedby="basic-addon2" value="<%= locals.oldData ? oldData.email : null  %>">
+          </div>
+
+          <% if(locals.errors && errors.password){ %>
+            <div class="form-errors"><%= errors.password.msg %></div> 
+          <% } %>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon2">Contraseña:</span>
+            <input type="password" name="password" id="password" class="form-control" aria-label="Password" aria-describedby="basic-addon2">
+          </div>
+
+          <% if(locals.errors && errors.password2){ %>
+            <div class="form-errors"><%= errors.password2.msg %></div> 
+          <% } %>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon2">Confirmar contraseña:</span>
+            <input type="password" name="password2" id="password2"  class="form-control" aria-label="Password2" aria-describedby="basic-addon2">
+          </div>
+
+          <% if(locals.errors && errors.avatar){ %>
+            <div class="form-errors"><%= errors.avatar.msg %></div> 
+          <% } %>
+          <div class="input-group mb-3">
+            <input type="file" name="avatar" id="avatar"  class="form-control" value="<%= locals.oldData ? oldData.avatar : null  %>">
+            <label class="input-group-text" for="avatar">*.jpg, *.png, *.gif</label>
+          </div>
+
+          <div class="row">
+            <a href="" class="text-center">
+                <button type="submit" class="btn btn-success">Registrarse</button>
+            </a>
+          </div>
+
+
+          <div class="row">
+            <a href="/users/login" class="nav-link text-center">Iniciar Sesión</a>
+          </div>
+        </form>
+      </div>
+  </div>
+
+<!--         <div class="registro_container">
+        <div class="registro_formulario">
+          <form action="/users/register" method="post" enctype="multipart/form-data">
+            <label for="name">Usuario:</label>
+            <input type="text" name="name" id="name" class="registro_formulario_items" >
+
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" class="registro_formulario_items">
+
+            <label for="password">Contraseña:</label>
+            <input type="password" name="password" id="password" class="registro_formulario_items">
+
+            <label for="password2">Confirmar contraseña:</label>
+            <input type="password" name="password2" id="password2" class="registro_formulario_items">
+
+            <label for="avatar">Imagen de perfil (*.jpg, *jpeg, *png, *gif):</label>
+            <input type="file" id="avatar" name="avatar" class="registro_formulario_items">
+
+            <input class="registro_formulario_enviar" type="submit" value="Registrarse">
+          </form>
+        </div>
+      </div>
+    </div> -->
+  </main>
+  <footer>
+      <%- include('../partials/footer'); %>
+  </footer>
+  <!-- <script src="https://kit.fontawesome.com/0cece3ed6e.js" crossorigin="anonymous"></script> -->
+</body>
+</html>

@@ -1,0 +1,75 @@
+<%- include('../partials/head') %> 
+<body>
+    <header>
+        <%- include('../partials/header')  %>
+    </header>
+    <main>
+        <div class="container">
+            <div class="row">
+                <h1 class="text-center">Mi Carrito</h1>
+            </div>
+            <hr>
+            <div class="row justify-content-md-center">
+                <% if(cartProductos.length > 0){
+                    cartProductos.forEach(function(producto){ %>
+                    <div class="row carrito-detalle">
+                        <div class="row align-items-center border-top">
+                            <div class="col-sm-3">
+                                <img width="150px" src="/img/<%= producto.product.image  %>" alt="iamgen del producto">
+                                <h5><%= producto.product.name %></h5>
+                            </div>
+                            <div class="col-sm-3">
+                                <h6>Precio: $ <%= toThousand(producto.product.price) %></h6>
+                            </div>
+                            <div class="col-sm-1" style="text-align: right;">
+                                <form action="/carrito/adicionarItemAlCarrito/<%= producto.id%>" method="post">
+                                    <button type="submit" class="btn btn-success contadores"><i class="fa-solid fa-plus"></i></button>
+                                </form>
+                            </div>
+                            <div class="col-sm-1" style="text-align: center;">
+                                <input type="text" style="width: 30px; text-align: right;" value="<%= producto.quantity %>">
+                            </div>
+                            <div class="col-sm-1">
+                                <form action="/carrito/restarItemAlCarrito/<%= producto.id%>" method="post">
+                                    <button class="btn btn-danger contadores"><i class="fa-solid fa-minus"></i></button>
+                                </form>
+                            </div>
+                            <div class="col-sm-2 text-center">
+                                <h6>Sub-total: $ <%= toThousand(producto.subtotal) %></h6>
+                            </div>
+                            <div class="col-sm-1 text-end">
+                                <form action="/carrito/borrarItemDelCarrito/<%= producto.id%>" method="post">
+                                    <button class="btn btn-secondary contadores"><i class="fa-solid fa-trash-can"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                <% })} else { %>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3 class="text-center">No hay productos en el carrito</h3>
+                        </div>
+                    </div>
+                <% } %>
+            <% if(cartProductos.length > 0){ %>
+                <div class="row carrito-detalle">
+                    <hr>
+                    <div class="col-sm-12">
+                        <h3 class="text-end">Total: $ <%= toThousand(total) %></h3>
+                    </div>
+                </div>
+            <div class="carrito-botonera text-end">
+                <a href="/carrito/delete/">
+                    <button type="submit" class="btn btn-danger"><h5>Vaciar Carrito</h5></button>
+                </a>
+                <button type="submit" class="btn btn-success"><h5>Finalizar Compra</h5></button>
+            </div>
+            <% } %>
+        </div>
+        </div>
+    </main>
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<%- include('../../partials/head') %> 
+<body>
+    <header>
+        <%- include('../../partials/header')  %>
+    </header>
+    <main>
+        <div class="container">
+            <div class="row">
+                <h1 class="text-center">Administración de Usuarios</h1>
+            </div>
+            <hr>
+            <div class="row text-end">
+                <a href="/admin/adminusuariosCreate">
+                    <button type="submit" class="btn btn-success">Agregar</button>
+                </a>
+            </div>
+            <table class="table table-success table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Avatar</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Rol</th>
+                    <th scope="col">Editar</th>
+                    <th scope="col">Eliminar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% usuarios.forEach(function(usuario){ %>
+                        <tr>
+                            <th scope="row"><%= usuario.id %></th>
+                            <td><img src="/img/avatars/<%= usuario.avatar  %>" alt="<%= usuario.avatar %>" class="img-thumbnail" width="100"></td>
+                            <td><%= usuario.name %></td>
+                            <td><%= usuario.email %></td>
+                            <td><%= usuario.role.role %></td>
+                            <td>
+                                <a href="/admin/adminusuariosEdit/<%= usuario.id %>">
+                                    <button type="submit" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></button>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/admin/adminusuariosDelete/<%= usuario.id %>">
+                                    <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+                                </a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <%- include('../../partials/footer'); %>
+    </footer>
+</body>
+</html>

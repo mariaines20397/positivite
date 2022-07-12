@@ -1,0 +1,52 @@
+<%- include('../partials/head') %> 
+<body>
+    <header>
+        <%- include('../partials/header')  %>
+    </header>
+    <main>
+        <div class="container">
+            <div class="row text-center">
+              <h1>Detalle del Producto</h1>
+              <hr>
+            </div>
+            <div class="row justify-content-lg-center">
+                <div class="row producto-detalle">
+                    <div class="col-sm-4">
+                        <img width="300px" src="/img/<%= producto.image  %>" alt="iamgen del producto">
+                        <h3><%= producto.name %></h3>
+                        <h4>Categoría: <%= producto.categories.categoria %></h4>
+                        <h4>Precio: $ <%= producto.price %></h4>
+                    </div>
+                    <div class="col-8">
+                        <h4>Características:</h4>
+                        <p><%= producto.description  %></p>
+                    </div>
+                    <div class="text-end">
+                        <% if(locals.usuario.role_id == 1 || locals.usuario.role_id == 2){ %>
+                            <div>
+                                <a href="/products/edit/<%= producto.id %>">
+                                    <button type="submit" class="btn btn-success">Editar</button>
+                                </a>
+                                <a href="/products/create/">
+                                    <button type="submit" class="btn btn-success">Agregar</button>
+                                </a>
+                                <a href="/products/delete/<%= producto.id %>">
+                                    <button type="submit" class="btn btn-success">Eliminar</button>
+                                </a>
+                            </div>
+                        <% }else{ %>
+                            <form action="/carrito/adicionarAlCarrito" method="post" class="form-inline" >
+                                <input type="hidden"  name="productId" value="<%= producto.id%>">
+                                <button type="submit" class="btn btn-success"><h5>Agregar al carrito<i class="fa-solid fa-cart-shopping"></i></h5></button>
+                            </form>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+</body>
+</html>

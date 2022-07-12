@@ -1,0 +1,55 @@
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/"><img class="img-fluid" src="/img/logo.png" alt="PositiviTea"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/">Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/products">Productos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/contactUs">Contacto</a>
+            </li>
+        </ul>
+        <form action="/products/search" method="post" class="d-flex" style="margin: auto;">
+          <input class="form-control me-2" type="search" name="search" placeholder="Buscar" aria-label="Search">
+          
+          <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
+        <% if(locals.usuario){ %>
+          <% if(locals.usuario.role_id == 3){ %>
+          <div class="nav-item">
+              <a class="nav-link" href="/carrito/carrito"><i class="fa-solid fa-cart-shopping"></i></a>
+          </div>
+          <div class="nav-item">
+            <a class="nav-link carrito-cantidad" href="/carrito/carrito"><%= carritoCantidad %></a>
+          </div>
+          <% } %> 
+          <div class="dropdown">
+            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              Hola <%= locals.usuario.name  %>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <% if(locals.usuario.role_id == 1){ %>
+                <li><a class="dropdown-item" href="/admin/adminproductos">Productos</a></li>
+                <li><a class="dropdown-item" href="/admin/adminusuarios">Usuarios</a></li>
+              <% } %>
+              <% if(locals.usuario.role_id == 2){ %>
+                <li><a class="dropdown-item" href="/admin/adminproductos">Productos</a></li>
+              <% } %>
+              <li><a class="dropdown-item" href="/users/profile">Mi Perfil</a></li>
+              <li><a class="dropdown-item" href="/users/logout">Cerrar Sesión</a></li>
+            </ul>
+          </div>
+        <% }else{%>
+            <a class="login" href="/users/register"><i class="fa-solid fa-user"></i></a>
+            <a class="login" href="/users/login"><i class="fa-solid fa-arrow-right-to-bracket"></i></a>
+        <% } %>
+      </div>
+    </div>
+  </nav>

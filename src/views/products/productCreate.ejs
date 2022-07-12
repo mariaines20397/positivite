@@ -1,0 +1,80 @@
+<%- include('../partials/head') %> 
+<body>
+    <header>
+        <%- include('../partials/header')  %>
+    </header>
+    <main>
+        <div class="container">
+            <div class="row text-center">
+              <h1>Alta de Producto</h1>
+              <hr>
+            </div>
+            <div class="row justify-content-lg-center">
+                <div class="row" style="width: 40rem;">
+                    <form action="/products/save" method="post" enctype="multipart/form-data">
+
+                        <% if(locals.errors && errors.name){ %>
+                            <div class="form-errors"><%= errors.name.msg %></div>
+                        <% } %>
+                        <div class="input-group mb-3">
+                            <input type="text" name="name" id="name" class="form-control" placeholder="Nombre del Producto:" aria-label="Nombre" aria-describedby="basic-addon1" value="<%= locals.oldData ? oldData.name : null  %>">
+                        </div>
+
+                        <% if(locals.errors && errors.price){ %>
+                            <div class="form-errors"><%= errors.price.msg %></div>
+                        <% } %>
+                        <div class="input-group mb-3">
+                            <input type="text" name="price" id="price" class="form-control" placeholder="Precio:" aria-label="Precio" aria-describedby="basic-addon1" value="<%= locals.oldData ? oldData.price : null  %>">
+                        </div>
+                        
+                        <% if(locals.errors && errors.category){ %>
+                            <div class="form-errors"><%= errors.category.msg %></div>
+                        <% } %>
+                        <div class="input-group mb-3">
+                            <select name="category" id="category" class="form-select" value="<%= locals.oldData ? oldData.category.categoria : null  %>">
+                                <option value="">Elegí una categoría</option>
+                                <% for (const categoria of categorias){ %>
+                                    <option value="<%= categoria.id %>"
+                                        <% if(locals.oldData && oldData.category == categoria.id){ %>
+                                            selected <% } %>
+                                        ><%= categoria.categoria %></option>
+                                <% } %>
+                            </select>
+                        </div>
+
+                        <% if(locals.errors && errors.description){ %>
+                            <div class="form-errors"><%= errors.description.msg %></div>
+                        <% } %>
+                        <div class="input-group mb-3">
+                            <textarea name="description" id="description" cols="30" rows="5" class="form-control" placeholder="Descripción" aria-label="Descripción" aria-describedby="basic-addon1"><%= locals.oldData ? oldData.description : null  %></textarea>
+                        </div>
+
+                        <% if(locals.errors && errors.image){ %>
+                            <div class="form-errors"><%= errors.image.msg %></div>
+                        <% } %>
+                        <div class="input-group mb-3">
+                            <input type="file" name="image" id="image" class="form-control" aria-label="image" aria-describedby="basic-addon1">
+                        </div>
+
+                        <% if(locals.errors && errors.stock){ %>
+                            <div class="form-errors"><%= errors.stock.msg %></div>
+                        <% } %>
+                        <div class="input-group mb-3">
+                            <input type="text" name="stock" id="stock" class="form-control" placeholder="Stock:" aria-label="Stock" aria-describedby="basic-addon1" value="<%= locals.oldData ? oldData.stock : null  %>">
+                        </div>
+
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-success">Guardar</button>                          
+                            <a href="/admin/adminproductos" class="btn btn-danger">Cancelar</a>                
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+</body>
+</html>

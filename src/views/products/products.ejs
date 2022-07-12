@@ -1,0 +1,72 @@
+<%- include('../partials/head') %> 
+<body>
+    <header>
+        <%- include('../partials/header')  %>
+    </header>
+    <main>
+        <div class="container">
+            <div class="row">
+                <h1 class="text-center">Productos</h1>
+            </div>
+            <hr>
+            <div class="row">
+                <h3 class="text-center">¿No sabés qué comprar?</h3>
+            </div>
+            <div class="row justify-content-lg-center">
+                <div class="col-auto">
+                    <div class="card text-center" style="width: 15rem;">
+                        <% 
+                        random = Math.floor(Math.random() * producto.length);
+                        productoRandom = producto[random];
+                        %>
+                        <div class="card-body">
+                            <a href="/products/detail/<%= productoRandom.id %>">
+                                <img src="img/<%= productoRandom.image %>" class="card-img-top" alt="<%= productoRandom.name %>">
+                            </a>
+                            <h5 class="card-title"><%= productoRandom.name %></h5>
+                            <p class="card-text">$ <%= productoRandom.price %></p>
+                            <a href="/products/detail/<%= productoRandom.id %>" class="btn btn-success">Ver Detalles</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h3 class="text-center">Elige uno de nuestros productos aleatoriamente</h3> 
+            <div class="row">
+                <a href="/products" class="text-center">
+                    <button class="btn btn-success">Descubrí</button>
+                </a>
+            </div>
+        </div>
+        <hr>
+        <div class="container">
+            <div class="row">
+                <%  categorias.forEach(function(categoria){ %>
+                    <div class="row">
+                        <h1 class="text-center">Categoría: <%= categoria.categoria %></h1>
+                    </div>
+                    <hr>
+                    <% producto.forEach(function(producto){ 
+                    if(producto.category_id == categoria.id){ %>
+                        <div class="col-auto">
+                            <div class="card" style="width: 15rem;">
+                                <div class="card-body">
+                                <a href="/products/detail/<%= producto.id %>">
+                                    <img src="img/<%= producto.image  %>" class="card-img-top" alt="...">
+                                </a>
+                                <h5 class="card-title"><%= producto.name  %></h5>
+                                <p class="card-text">$ <%= toThousand(producto.price)  %></p>
+                                <a href="/products/detail/<%= producto.id %>" class="btn btn-success">Ver Detalles</a>
+                                </div>
+                            </div>
+                        <br>
+                        </div>
+                    <% } %>
+                <% })}); %>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+</body>
+</html>
